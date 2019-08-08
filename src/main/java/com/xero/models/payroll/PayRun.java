@@ -56,8 +56,10 @@ public class PayRun {
    * See PayRun Status
    */
   public enum StatusEnum {
+	@SerializedName("Draft")
     DRAFT("Draft"),
     
+    @SerializedName("Posted")
     POSTED("Posted");
 
     private String value;
@@ -87,19 +89,21 @@ public class PayRun {
     }
   }
 
-  @JsonProperty("PayRunStatus")
+  @SerializedName("PayRunStatus")
   private StatusEnum payRunStatus = null;
   
   /**
    * See PayRun Type
    */
   public enum TypeEnum {
-	  @SerializedName("Scheduled")
-	  SCHEDULED("Scheduled"),
-	  @SerializedName("Unscheduled")
-	  UNSCHEDULED("Unscheduled"),
-	  @SerializedName("EarlierYearUpdate")
-	  EARLIERYEARUPDATE("EarlierYearUpdate");
+	@SerializedName("Scheduled")
+	SCHEDULED("Scheduled"),
+	
+	@SerializedName("Unscheduled")
+	UNSCHEDULED("Unscheduled"),
+	  
+	@SerializedName("EarlierYearUpdate")
+	EARLIERYEARUPDATE("EarlierYearUpdate");
 
     private String value;
 
@@ -135,17 +139,23 @@ public class PayRun {
    * See Calendar Type
    */
   public enum CalTypeEnum {
-	  WEEKLY("Weekly"),
+	@SerializedName("Weekly")
+	WEEKLY("Weekly"),
 	  
-	  FORTNIGHTLY("Fortnightly"),
+	@SerializedName("Fortnightly")
+	FORTNIGHTLY("Fortnightly"),
 	  
-	  FOURWEEKLY("FourWeekly"),
+	@SerializedName("FourWeekly")
+	FOURWEEKLY("FourWeekly"),
 	  
-	  MONTHLY("Monthly"),
+	@SerializedName("Monthly")
+	MONTHLY("Monthly"),
 	  
-	  ANNUAL("Annual"),
+	@SerializedName("Annual")
+	ANNUAL("Annual"),
 	  
-	  QUARTERLY("Quarterly");
+	@SerializedName("Quarterly")
+	QUARTERLY("Quarterly");
 
     private String value;
 
@@ -174,7 +184,7 @@ public class PayRun {
     }
   }
 
-  @JsonProperty("CalendarType")
+  @SerializedName("CalendarType")
   private CalTypeEnum calendarType = null;
   
   @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)

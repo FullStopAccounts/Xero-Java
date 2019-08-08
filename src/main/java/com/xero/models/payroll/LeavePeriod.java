@@ -16,20 +16,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.threeten.bp.LocalDate;
-
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 /**
  * LeavePeriod
  */
 
 public class LeavePeriod {
 	
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("periodStartDate")
   private LocalDate periodStartDate;
   
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("periodEndDate")
   private LocalDate periodEndDate;
   

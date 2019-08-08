@@ -15,8 +15,6 @@ import java.util.UUID;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
-
 /**
  * Leave
  */
@@ -32,18 +30,15 @@ public class Leave {
   @JsonProperty("description")
   private String description;
   
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("startDate")
   private LocalDate startDate;
   
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("endDate")
   private LocalDate endDate;
   
   @JsonProperty("periods")
   private List<LeavePeriod> periods;
   
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("updatedDateUTC")
   private LocalDateTime updatedDateUTC;
   
