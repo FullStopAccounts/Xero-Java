@@ -29,6 +29,9 @@ public class LeaveType {
   @JsonProperty("leaveTypeID")
   private UUID leaveTypeID;
   
+  @JsonProperty("name")
+  private String name;
+  
   /**
    * See ScheduleOfAccrual Codes
    */
@@ -74,9 +77,6 @@ public class LeaveType {
 
   @SerializedName("scheduleOfAccrual")
   private CodesEnum scheduleOfAccrual;
-  
-  @JsonProperty("name")
-  private String name;
   
   @JsonProperty("hoursAccruedAnnually")
   private Double hoursAccruedAnnually;
