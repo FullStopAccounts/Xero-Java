@@ -20,7 +20,7 @@ import java.util.UUID;
 import org.threeten.bp.LocalDate;
 
 /**
- * Leave
+ * StatutorySickLeave
  */
 
 public class StatutorySickLeave {

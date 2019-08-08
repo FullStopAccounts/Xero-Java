@@ -9,6 +9,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.annotations.SerializedName;
 import com.xero.models.accounting.ValidationError;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -35,8 +36,10 @@ public class LeavePeriod {
    * See periodStatustatus
    */
   public enum StatusEnum {
+	@SerializedName("Approved")
 	APPROVED("Approved"),
     
+	@SerializedName("Completed")
 	COMPLETED("Completed");
 
     private String value;
@@ -66,7 +69,7 @@ public class LeavePeriod {
     }
   }
 
-  @JsonProperty("periodStatus")
+  @SerializedName("periodStatus")
   private StatusEnum periodStatus;
   
   @JsonProperty("validationErrors")

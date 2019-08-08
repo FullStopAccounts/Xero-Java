@@ -20,7 +20,7 @@ import java.util.UUID;
 import org.threeten.bp.LocalDate;
 
 /**
- * LeaveType
+ * StatutoryLeave
  */
 
 public class StatutoryLeave {

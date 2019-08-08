@@ -10,6 +10,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.gson.annotations.SerializedName;
 import com.xero.models.accounting.ValidationError;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -32,12 +33,16 @@ public class LeaveType {
    * See ScheduleOfAccrual Codes
    */
   public enum CodesEnum {
+	@SerializedName("BeginningOfCalendarYear")
 	BEGINNINGOFCALENDARYEAR("BeginningOfCalendarYear"),
 	
+	@SerializedName("OnAnniversaryDate")
 	ONANNIVERSARYDATE("OnAnniversaryDate"),
 	
+	@SerializedName("EachPayPeriod")
 	EACHPAYPERIOD("EachPayPeriod"),
     
+	@SerializedName("OnHourWorked")
     ONHOURWORKED("OnHourWorked");
 
     private String value;
@@ -67,7 +72,7 @@ public class LeaveType {
     }
   }
 
-  @JsonProperty("scheduleOfAccrual")
+  @SerializedName("scheduleOfAccrual")
   private CodesEnum scheduleOfAccrual;
   
   @JsonProperty("name")
