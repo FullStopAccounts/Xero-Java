@@ -7,7 +7,6 @@ import org.threeten.bp.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xero.model.Elements;
-import com.xero.models.accounting.TrackingCategories;
 
 /**
  * PayrollResponse
@@ -27,40 +26,80 @@ public class PayrollResponse {
  protected Pagination pagination;
  @JsonProperty("Problem")
  protected String problem;
+ @JsonProperty("Benefit")
+ protected Benefit benefit;
  @JsonProperty("Benefits")
  protected List<Benefit> benefits;
- @JsonProperty("Deductions")
- protected List<Deduction> deductions;
- @JsonProperty("EarningsRates")
- protected List<EarningsRate> earningsRates;
  @JsonProperty("Employee")
  protected Employee employee;
  @JsonProperty("Employees")
  protected List<Employee> employees;
- @JsonProperty("LeaveBalances")
- protected List<LeaveBalance> leaveBalances;
- @JsonProperty("LeavePeriods")
- protected List<LeavePeriod> leavePeriods;
- @JsonProperty("LeaveTypes")
- protected List<LeaveType> leaveTypes;
+ @JsonProperty("EmployeeTax")
+ protected EmployeeTax employeeTax;
  @JsonProperty("OpeningBalances")
  protected OpeningBalances openingBalances;
+ @JsonProperty("Leave")
+ protected EmployeeLeave leave;
+ @JsonProperty("LeaveBalance")
+ protected LeaveBalance leaveBalance;
+ @JsonProperty("LeaveBalances")
+ protected List<LeaveBalance> leaveBalances;
+ @JsonProperty("StatutoryLeaves")
+ protected List<StatutoryLeave> statutoryLeaves;
+ @JsonProperty("StatutorySickLeave")
+ protected StatutorySickLeave statutorySickLeave;
+ @JsonProperty("LeavePeriods")
+ protected List<LeavePeriod> leavePeriods;
+ @JsonProperty("LeaveType")
+ protected LeaveType leaveType;
+ @JsonProperty("LeaveTypes")
+ protected List<LeaveType> leaveTypes;
+ @JsonProperty("payTemplates")
+ protected PayTemplate payTemplates;
+ @JsonProperty("Deduction")
+ protected Deduction deduction;
+ @JsonProperty("Deductions")
+ protected List<Deduction> deductions;
+ @JsonProperty("StatutoryDeduction")
+ protected StatutoryDeduction statutoryDeduction;
+ @JsonProperty("StatutoryDeductions")
+ protected List<StatutoryDeduction> statutoryDeductions;
+ @JsonProperty("EarningsRate")
+ protected EarningsRate earningsRate;
+ @JsonProperty("EarningsRates")
+ protected List<EarningsRate> earningsRates;
+ @JsonProperty("Reimbursement")
+ protected Reimbursement reimbursement;
+ @JsonProperty("Reimbursements")
+ protected List<Reimbursement> reimbursements;
+ @JsonProperty("Timesheet")
+ protected Timesheet timesheet;
+ @JsonProperty("Timesheets")
+ protected List<Timesheet> timesheets;
+ @JsonProperty("PaymentMethod")
+ protected PaymentMethod paymentMethod;
+ @JsonProperty("PayRunCalendar")
+ protected PayRunCalendar payRunCalendar;
+ @JsonProperty("PayRunCalendars")
+ protected List<PayRunCalendar> payRunCalendars;
+ @JsonProperty("SalaryAndWages")
+ protected List<SalaryAndWage> salaryAndWages;
  @JsonProperty("PayRun")
  protected PayRun payRun;
  @JsonProperty("PayRuns")
  protected List<PayRun> payRuns;
- @JsonProperty("PayRunCalendars")
- protected List<PayRunCalendar> payRunCalendars;
  @JsonProperty("PaySlip")
  protected PaySlip paySlip;
  @JsonProperty("PaySlips")
  protected List<PaySlip> paySlips;
- @JsonProperty("SalaryAndWages")
- protected List<SalaryAndWage> salaryAndWages;
+ @JsonProperty("Settings")
+ protected Accounts settings;
+ @JsonProperty("Accounts")
+ protected List<Account> accounts;
  @JsonProperty("ApiException")
  protected Elements apiException;
- @JsonProperty("Options")
- protected TrackingCategories options;
+ @JsonProperty("TrackingCategories")
+ protected TrackingCategories trackingCategories;
 
  
  public UUID getId() {
@@ -109,6 +148,14 @@ public class PayrollResponse {
  public void setProblem(String value) {
      this.problem = value;
  }
+ 
+ 
+ public Benefit getBenefit() {
+	 return benefit;
+ }
+ public void setBenefit(Benefit benefit) {
+	 this.benefit = benefit;
+ }
 
  
  public List<Benefit> getBenefits() {
@@ -116,22 +163,6 @@ public class PayrollResponse {
  }
  public void setBenefits(List<Benefit> benefits) {
 	 this.benefits = benefits;
- }
- 
- 
- public List<Deduction> getDeductions() {
-	 return deductions;
- }
- public void setDeductions(List<Deduction> deductions) {
-	 this.deductions = deductions;
- }
- 
- 
- public List<EarningsRate> getEarningsRates() {
-	 return earningsRates;
- }
- public void setEarningsRates(List<EarningsRate> earningsRates) {
-	 this.earningsRates = earningsRates;
  }
  
  
@@ -149,6 +180,38 @@ public class PayrollResponse {
  public void setEmployees(List<Employee> employees) {
 	 this.employees = employees;
  }
+
+ 
+ public EmployeeTax getEmployeeTax() {
+	 return employeeTax;
+ }
+ public void setEmployeeTax(EmployeeTax employeeTax) {
+	 this.employeeTax = employeeTax;
+ }
+ 
+ 
+ public OpeningBalances getOpeningBalances() {
+	 return openingBalances;
+ }
+ public void setOpeningBalances(OpeningBalances openingBalances) {
+	 this.openingBalances = openingBalances;
+ }
+ 
+ 
+ public EmployeeLeave getLeave() {
+	 return leave;
+ }
+ public void setLeave(EmployeeLeave leave) {
+	 this.leave = leave;
+ }
+ 
+ 
+ public LeaveBalance getLeaveBalance() {
+	 return leaveBalance;
+ }
+ public void setLeaveBalance(LeaveBalance leaveBalance) {
+	 this.leaveBalance = leaveBalance;
+ }
  
  
  public List<LeaveBalance> getLeaveBalances() {
@@ -156,6 +219,22 @@ public class PayrollResponse {
  }
  public void setLeaveBalances(List<LeaveBalance> leaveBalances) {
 	 this.leaveBalances = leaveBalances;
+ }
+ 
+ 
+ public List<StatutoryLeave> getStatutoryLeaves() {
+	 return statutoryLeaves;
+ }
+ public void setStatutoryLeaves(List<StatutoryLeave> statutoryLeaves) {
+	 this.statutoryLeaves = statutoryLeaves;
+ }
+ 
+ 
+ public StatutorySickLeave getStatutorySickLeave() {
+	 return statutorySickLeave;
+ }
+ public void setStatutorySickLeave(StatutorySickLeave statutorySickLeave) {
+	 this.statutorySickLeave = statutorySickLeave;
  }
  
  
@@ -167,6 +246,86 @@ public class PayrollResponse {
  }
  
  
+ public PayTemplate getPayTemplates() {
+	 return payTemplates;
+ }
+ public void setPayTemplates(PayTemplate payTemplates) {
+	 this.payTemplates = payTemplates;
+ }
+ 
+ 
+ public Reimbursement getReimbursement() {
+	 return reimbursement;
+ }
+ public void setReimbursement(Reimbursement reimbursement) {
+	 this.reimbursement = reimbursement;
+ }
+ 
+ 
+ public List<Reimbursement> getReimbursements() {
+	 return reimbursements;
+ }
+ public void setReimbursements(List<Reimbursement> reimbursements) {
+	 this.reimbursements = reimbursements;
+ }
+ 
+ 
+ public List<Deduction> getDeductions() {
+	 return deductions;
+ }
+ public void setDeductions(List<Deduction> deductions) {
+	 this.deductions = deductions;
+ }
+ 
+ 
+ public Deduction getDeduction() {
+	 return deduction;
+ }
+ public void setDeduction(Deduction deduction) {
+	 this.deduction = deduction;
+ }
+ 
+ 
+ public StatutoryDeduction getStatutoryDeduction() {
+	 return statutoryDeduction;
+ }
+ public void setStatutoryDeduction(StatutoryDeduction statutoryDeduction) {
+	 this.statutoryDeduction = statutoryDeduction;
+ }
+ 
+ 
+ public List<StatutoryDeduction> getStatutoryDeductions() {
+	 return statutoryDeductions;
+ }
+ public void setStatutoryDeductions(List<StatutoryDeduction> statutoryDeductions) {
+	 this.statutoryDeductions = statutoryDeductions;
+ }
+ 
+ 
+ public EarningsRate getEarningsRate() {
+	 return earningsRate;
+ }
+ public void setEarningsRate(EarningsRate earningsRate) {
+	 this.earningsRate = earningsRate;
+ }
+ 
+ 
+ public List<EarningsRate> getEarningsRates() {
+	 return earningsRates;
+ }
+ public void setEarningsRates(List<EarningsRate> earningsRates) {
+	 this.earningsRates = earningsRates;
+ }
+ 
+ 
+ public LeaveType getLeaveType() {
+	 return leaveType;
+ }
+ public void setLeaveType(LeaveType leaveType) {
+	 this.leaveType = leaveType;
+ }
+ 
+ 
  public List<LeaveType> getLeaveTypes() {
 	 return leaveTypes;
  }
@@ -175,11 +334,51 @@ public class PayrollResponse {
  }
  
  
- public OpeningBalances getOpeningBalances() {
-	 return openingBalances;
+ public Timesheet getTimesheet() {
+	 return timesheet;
  }
- public void setOpeningBalances(OpeningBalances openingBalances) {
-	 this.openingBalances = openingBalances;
+ public void setTimesheet(Timesheet timesheet) {
+	 this.timesheet = timesheet;
+ } 
+ 
+ 
+ public List<Timesheet> getTimesheets() {
+	 return timesheets;
+ }
+ public void setTimesheets(List<Timesheet> timesheets) {
+	 this.timesheets = timesheets;
+ }
+ 
+ 
+ public PaymentMethod getPaymentMethod() {
+	 return paymentMethod;
+ }
+ public void setPaymentMethod(PaymentMethod paymentMethod) {
+	 this.paymentMethod = paymentMethod;
+ }
+ 
+ 
+ public PayRunCalendar getPayRunCalendar() {
+	 return payRunCalendar;
+ }
+ public void setPayRunCalendar(PayRunCalendar payRunCalendar) {
+	 this.payRunCalendar = payRunCalendar;
+ }
+ 
+ 
+ public List<PayRunCalendar> getPayRunCalendars() {
+     return payRunCalendars;
+ }
+ public void setPayRunCalendars(List<PayRunCalendar> value) {
+     this.payRunCalendars = value;
+ }
+ 
+ 
+ public List<SalaryAndWage> getSalaryAndWages() {
+	 return salaryAndWages;
+ }
+ public void setSalaryAndWages(List<SalaryAndWage> salaryAndWages) {
+	 this.salaryAndWages = salaryAndWages;
  }
  
  
@@ -199,14 +398,6 @@ public class PayrollResponse {
  }
  
  
- public List<PayRunCalendar> getPayRunCalendars() {
-     return payRunCalendars;
- }
- public void setPayRunCalendars(List<PayRunCalendar> value) {
-     this.payRunCalendars = value;
- }
- 
- 
  public PaySlip getPaySlip() {
 	 return paySlip;
  } 
@@ -223,14 +414,6 @@ public class PayrollResponse {
  }
  
  
- public List<SalaryAndWage> getSalaryAndWages() {
-	 return salaryAndWages;
- }
- public void setSalaryAndWages(List<SalaryAndWage> salaryAndWages) {
-	 this.salaryAndWages = salaryAndWages;
- }
- 
- 
  public Elements getApiException() {
      return apiException;
  }
@@ -239,10 +422,10 @@ public class PayrollResponse {
  }
 
  
- public TrackingCategories getOptions() {
-     return options;
+ public TrackingCategories getTrackingCategories() {
+     return trackingCategories;
  }
- public void setOptions(TrackingCategories value) {
-     this.options = value;
+ public void setTrackingCategories(TrackingCategories value) {
+     this.trackingCategories = value;
  }
 }

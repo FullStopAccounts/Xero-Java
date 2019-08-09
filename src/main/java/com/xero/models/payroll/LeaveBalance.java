@@ -7,6 +7,8 @@ package com.xero.models.payroll;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xero.models.accounting.ValidationError;
+import com.xero.models.payroll.StatutoryLeave.TypeEnum;
+
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,7 +31,16 @@ public class LeaveBalance {
   
   @JsonProperty("typeOfUnits")
   private String typeOfUnits;
- 
+  
+  @JsonProperty("leaveType")
+  private TypeEnum leaveType;
+  
+  @JsonProperty("balanceRemaining")
+  private Double balanceRemaining;
+  
+  @JsonProperty("units")
+  private String units;
+  
   @JsonProperty("validationErrors")
   private List<ValidationError> validationErrors = null;
   
@@ -98,6 +109,54 @@ public class LeaveBalance {
     this.typeOfUnits = typeOfUnits;
   }
   
+  public LeaveBalance leaveType(TypeEnum leaveType) {
+    this.leaveType = leaveType;
+    return this;
+  }
+  /**
+   * The type of statutory leave
+   * @return leaveType
+  **/
+  @ApiModelProperty(value = "The type of statutory leave")
+  public TypeEnum getLeaveType() {
+    return leaveType;
+  }
+  public void setLeaveType(TypeEnum leaveType) {
+    this.leaveType = leaveType;
+  }
+  
+  public LeaveBalance balanceRemaining(Double balanceRemaining) {
+    this.balanceRemaining = balanceRemaining;
+    return this;
+  }
+  /**
+   * The balance remaining for the corresponding leave type as of specified date
+   * @return balanceRemaining
+  **/
+  @ApiModelProperty(value = "The balance remaining for the corresponding leave type as of specified date")
+  public Double getBalanceRemaining() {
+    return balanceRemaining;
+  }
+  public void setBalanceRemaining(Double balanceRemaining) {
+    this.balanceRemaining = balanceRemaining;
+  }
+  
+  public LeaveBalance units(String units) {
+    this.units = units;
+    return this;
+  }
+  /**
+   * The units will be "Hours"
+   * @return units
+  **/
+  @ApiModelProperty(value = "The units will be 'Hours'")
+  public String getUnits() {
+    return units;
+  }
+  public void setUnits(String units) {
+    this.units = units;
+  }
+  
   public LeaveBalance validationErrors(List<ValidationError> validationErrors) {
     this.validationErrors = validationErrors;
     return this;
@@ -138,12 +197,15 @@ public class LeaveBalance {
         Objects.equals(this.leaveTypeID, leaveBalance.leaveTypeID) &&
         Objects.equals(this.balance, leaveBalance.balance) &&
         Objects.equals(this.typeOfUnits, leaveBalance.typeOfUnits) &&
+        Objects.equals(this.leaveType, leaveBalance.leaveType) &&
+        Objects.equals(this.balanceRemaining, leaveBalance.balanceRemaining) &&
+        Objects.equals(this.units, leaveBalance.units) &&
         Objects.equals(this.validationErrors, leaveBalance.validationErrors);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(name, leaveTypeID, balance, typeOfUnits, validationErrors);
+    return Objects.hash(name, leaveTypeID, balance, typeOfUnits, leaveType, balanceRemaining, units, validationErrors);
   }
 
 
@@ -156,6 +218,9 @@ public class LeaveBalance {
     sb.append("    leaveTypeID: ").append(toIndentedString(leaveTypeID)).append("\n");
     sb.append("    balance: ").append(toIndentedString(balance)).append("\n");
     sb.append("    typeOfUnits: ").append(toIndentedString(typeOfUnits)).append("\n");
+    sb.append("    leaveType: ").append(toIndentedString(leaveType)).append("\n");
+    sb.append("    balanceRemaining: ").append(toIndentedString(balanceRemaining)).append("\n");
+    sb.append("    units: ").append(toIndentedString(units)).append("\n");
     sb.append("    validationErrors: ").append(toIndentedString(validationErrors)).append("\n");
     sb.append("}");
     return sb.toString();

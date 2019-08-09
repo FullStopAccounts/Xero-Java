@@ -9,6 +9,7 @@ import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
+import com.google.gson.annotations.SerializedName;
 import com.xero.models.accounting.ValidationError;
 
 import io.swagger.annotations.ApiModelProperty;
@@ -32,20 +33,28 @@ public class Deduction {
    * See Deduction Categories
    */
   public enum CategoryEnum {
+	  @SerializedName("StakeholderPension")
 	  STAKEHOLDERPENSION("StakeholderPension"),
 	  
+	  @SerializedName("StakeholderPensionPostTax")
 	  STAKEHOLDERPENSIONPOSTTAX("StakeholderPensionPostTax"),
 	  
+	  @SerializedName("StudentLoanDeductions")
 	  STUDENTLOANDEDUCTIONS("StudentLoanDeductions"),
 	  
+	  @SerializedName("PostgraduateLoanDeductions")
 	  POSTGRADUATELOANDEDUCTIONS("PostgraduateLoanDeductions"),
 	  
+	  @SerializedName("ChildCareVoucher")
 	  CHILDCAREVOUCHER("ChildCareVoucher"),
 	  
+	  @SerializedName("SalarySacrifice")
 	  SALARYSACRIFICE("SalarySacrifice"),
 	  
+	  @SerializedName("UkOther")
 	  UKOTHER("UkOther"),
 	  
+	  @SerializedName("Other")
 	  OTHER("Other");
 
     private String value;
@@ -75,7 +84,7 @@ public class Deduction {
     }
   }
 
-  @JsonProperty("deductionCategory")
+  @SerializedName("deductionCategory")
   private CategoryEnum deductionCategory;
   
   @JsonProperty("liabilityAccountId")

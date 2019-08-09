@@ -4,36 +4,45 @@
 
 package com.xero.models.payroll;
 
-import java.util.List;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModelProperty;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Settings
+ * EmployeeLeave
  */
 
-public class Settings {
+public class EmployeeLeave {
   
-  @JsonProperty("accounts")
-  private List<Account> accounts = null;
+  @JsonProperty("leave")
+  private List<Leave> leave = null;
 
-  public Settings accounts(List<Account> accounts) {
-    this.accounts = accounts;
+  public EmployeeLeave leave(List<Leave> leave) {
+    this.leave = leave;
+    return this;
+  }
+
+  public EmployeeLeave addLeaveItem(Leave leaveItem) {
+    if (this.leave == null) {
+      this.leave = new ArrayList<Leave>();
+    }
+    this.leave.add(leaveItem);
     return this;
   }
 
    /**
-   * Get accounts
-   * @return accounts
+   * Get employees
+   * @return employees
   **/
   @ApiModelProperty(value = "")
-  public List<Account> getAccounts() {
-    return accounts;
+  public List<Leave> getEmployeeLeave() {
+    return leave;
   }
 
-  public void setAccounts(List<Account> accounts) {
-    this.accounts = accounts;
+  public void setEmployeeLeave(List<Leave> leave) {
+    this.leave = leave;
   }
 
 
@@ -45,22 +54,22 @@ public class Settings {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Settings settings = (Settings) o;
-    return Objects.equals(this.accounts, settings.accounts);
+    EmployeeLeave employeeLeave = (EmployeeLeave) o;
+    return Objects.equals(this.leave, employeeLeave.leave);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(accounts);
+    return Objects.hash(leave);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class Settings {\n");
+    sb.append("class EmployeeLeave {\n");
     
-    sb.append("    accounts: ").append(toIndentedString(accounts)).append("\n");
+    sb.append("    leave: ").append(toIndentedString(leave)).append("\n");
     sb.append("}");
     return sb.toString();
   }

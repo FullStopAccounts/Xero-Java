@@ -10,6 +10,7 @@ import com.google.gson.GsonBuilder;
 import com.xero.api.exception.XeroExceptionHandler;
 import com.xero.model.*;
 import com.xero.models.payroll.*;
+import com.xero.models.payroll.Employee;
 import com.xero.api.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -240,6 +241,210 @@ public class PayrollApi {
     		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
     	}
     }
+    
+    /**
+     * Allows you to retrieve payroll employees in a Xero organisation 
+     * <p><b>200</b> - Success - return response of type Employees array with 0 to N Employee
+     * @param page e.g. page&#x3D;1 - Up to 100 employees will be returned in a single API call.
+     * @param firstName - string for employee first name
+     * @param lastName - string for employee last name
+     * @return Employees
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public Employees getEmployees(Integer page, String firstName, String lastName) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/employees";
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.build().toString();
+    		params = new HashMap<>();
+    		if (page != null) {
+    			addToMapIfNotNull(params, "page", page);
+    		}if (firstName != null) {
+                addToMapIfNotNull(params, "firstName", firstName);
+            }if (lastName != null) {
+                addToMapIfNotNull(params, "lastName", lastName);
+            }
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		Employees emp = new Employees();
+    		emp.setEmployees(pr.getEmployees());
+    		
+    		return emp;           
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve payroll employees in a Xero organisation 
+     * <p><b>200</b> - Success - return response of type Employee
+     * @param employeeID - Unique identifier for an Employee
+     * @return Employee
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public Employee getEmployee(UUID employeeID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/employees/{EmployeeID}";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/employees/{EmployeeID}";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase())) {
+    			correctPath = path.replace("/pdf","");
+    		} 
+    		
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("EmployeeID", employeeID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		return pr.getEmployee();           
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve tax in Payroll for an employee in a Xero organisation
+     * <p><b>200</b> - Success - return response of type EmployeeTax for specific Employee
+     * @param employeeID - Unique identifier for an Employee
+     * @return EmployeeTax
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public EmployeeTax getEmployeeTax(UUID employeeID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/employees/{EmployeeID}/tax";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/employees/{EmployeeID}/tax";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase())) {
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("EmployeeID", employeeID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    			
+    		return pr.getEmployeeTax();          
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve Leave Balances for an employee
+     * <p><b>200</b> - Success - return response of type LeaveBalances array with all LeaveBalance for specific Employee
+     * @param employeeID Unique identifier for an Employee
+     * @return LeaveBalances
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public LeaveBalances getEmployeeLeaveBalances(UUID employeeID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/employees/{EmployeeID}/leaveBalances";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/employees/{EmployeeID}/leaveBalances";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase())) {
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("EmployeeID", employeeID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		LeaveBalances lb = new LeaveBalances();
+    		lb.setLeaveBalances(pr.getLeaveBalances());
+    		
+    		return lb;          
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve SalaryAndWages for an employee
+     * <p><b>200</b> - Success - return response of type SalaryAndWages array with a unique SalaryAndWage
+     * @param employeeID Unique identifier for an employee
+     * @param page e.g. page&#x3D;1 - Up to 100 Salary And Wages will be returned in a single API call.
+     * @return SalaryAndWages
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+     public SalaryAndWages getSalaryAndWages(UUID employeeID, Integer page) throws IOException {
+         try {
+             String strBody = null;
+             Map<String, String> params = null;
+             String correctPath = "/employees/{EmployeeID}/salaryAndWages";
+             // Hacky path manipulation to support different return types from same endpoint
+             String path = "/employees/{EmployeeID}/salaryAndWages";
+             String type = "/pdf";
+             if(path.toLowerCase().contains(type.toLowerCase())) {
+                 correctPath = path.replace("/pdf","");
+             } 
+             params = new HashMap<>();
+             if (page != null) {
+                 addToMapIfNotNull(params, "page", page);
+             }
+
+             // create a map of path variables
+             final Map<String, String> uriVariables = new HashMap<String, String>();
+             uriVariables.put("EmployeeID", employeeID.toString());
+             UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+             String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+             String response = this.DATA(url, strBody, params, "GET");
+
+             PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+      		
+     		 SalaryAndWages sw = new SalaryAndWages();
+     		 sw.setSalaryAndWages(pr.getSalaryAndWages());
+     		
+     		 return sw;          
+
+         } catch (IOException e) {
+             throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+         } catch (XeroApiException e) {
+             throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+         }
+     }
 	  
     /**
      * Allows you to retrieve deductions in a Xero organisation
@@ -303,82 +508,6 @@ public class PayrollApi {
     		er.setEarningsRates(pr.getEarningsRates());
     		
     		return er;          
-
-    	} catch (IOException e) {
-    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
-    	} catch (XeroApiException e) {
-    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
-    	}
-    }
-    
-    /**
-     * Allows you to retrieve employees in a Xero organisation
-     * <p><b>200</b> - Success - return response of type Employees array with 0 to N Employee
-     * @param page e.g. page&#x3D;1 - Up to 100 employees will be returned in a single API call.
-     * @return Employees
-     * @throws IOException if an error occurs while attempting to invoke the API
-     **/
-    public Employees getEmployees(Integer page) throws IOException {
-    	try {
-    		String strBody = null;
-    		Map<String, String> params = null;
-    		String correctPath = "/employees";
-    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
-    		String url = uriBuilder.build().toString();
-    		params = new HashMap<>();
-    		if (page != null) {
-    			addToMapIfNotNull(params, "page", page);
-    		}
-
-    		String response = this.DATA(url, strBody, params, "GET");
-
-    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
-    		
-    		Employees emp = new Employees();
-    		emp.setEmployees(pr.getEmployees());
-    		
-    		return emp;           
-
-    	} catch (IOException e) {
-    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
-    	} catch (XeroApiException e) {
-    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
-    	}
-    }
-
-    /**
-     * Allows you to retrieve Leave Balances for an employee
-     * <p><b>200</b> - Success - return response of type LeaveBalances array with all LeaveBalance for specific Employee
-     * @param employeeID Unique identifier for an Employee
-     * @return LeaveBalances
-     * @throws IOException if an error occurs while attempting to invoke the API
-     **/
-    public LeaveBalances getLeaveBalances(UUID employeeID) throws IOException {
-    	try {
-    		String strBody = null;
-    		Map<String, String> params = null;
-    		String correctPath = "/employees/{EmployeeID}/leaveBalances";
-    		// Hacky path manipulation to support different return types from same endpoint
-    		String path = "/employees/{EmployeeID}/leaveBalances";
-    		String type = "/pdf";
-    		if(path.toLowerCase().contains(type.toLowerCase())) {
-    			correctPath = path.replace("/pdf","");
-    		} 
-
-    		// create a map of path variables
-    		final Map<String, String> uriVariables = new HashMap<String, String>();
-    		uriVariables.put("EmployeeID", employeeID.toString());
-    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
-    		String url = uriBuilder.buildFromMap(uriVariables).toString();
-
-    		String response = this.DATA(url, strBody, params, "GET");
-
-    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
-    		
-    		LeaveBalances lb = new LeaveBalances();
-    		lb.setLeaveBalances(pr.getLeaveBalances());
-    		
-    		return lb;          
 
     	} catch (IOException e) {
     		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
@@ -606,53 +735,6 @@ public class PayrollApi {
       		  ps.setPaySlips(pr.getPaySlips());
       		
       		  return ps;                    
-
-          } catch (IOException e) {
-              throw xeroExceptionHandler.handleBadRequest(e.getMessage());
-          } catch (XeroApiException e) {
-              throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
-          }
-      }
-     
-      
-     /**
-      * Allows you to retrieve SalaryAndWages for an employee
-      * <p><b>200</b> - Success - return response of type SalaryAndWages array with a unique SalaryAndWage
-      * @param employeeID Unique identifier for an employee
-      * @param page e.g. page&#x3D;1 - Up to 100 Salary And Wages will be returned in a single API call.
-      * @return SalaryAndWages
-      * @throws IOException if an error occurs while attempting to invoke the API
-      **/
-      public SalaryAndWages getSalaryAndWages(UUID employeeID, Integer page) throws IOException {
-          try {
-              String strBody = null;
-              Map<String, String> params = null;
-              String correctPath = "/employees/{EmployeeID}/salaryAndWages";
-              // Hacky path manipulation to support different return types from same endpoint
-              String path = "/employees/{EmployeeID}/salaryAndWages";
-              String type = "/pdf";
-              if(path.toLowerCase().contains(type.toLowerCase())) {
-                  correctPath = path.replace("/pdf","");
-              } 
-              params = new HashMap<>();
-              if (page != null) {
-                  addToMapIfNotNull(params, "page", page);
-              }
-
-              // create a map of path variables
-              final Map<String, String> uriVariables = new HashMap<String, String>();
-              uriVariables.put("EmployeeID", employeeID.toString());
-              UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
-              String url = uriBuilder.buildFromMap(uriVariables).toString();
-
-              String response = this.DATA(url, strBody, params, "GET");
-
-              PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
-       		
-      		  SalaryAndWages sw = new SalaryAndWages();
-      		  sw.setSalaryAndWages(pr.getSalaryAndWages());
-      		
-      		  return sw;          
 
           } catch (IOException e) {
               throw xeroExceptionHandler.handleBadRequest(e.getMessage());

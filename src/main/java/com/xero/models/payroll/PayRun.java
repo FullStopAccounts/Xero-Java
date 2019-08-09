@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.xero.models.accounting.ValidationError;
+import com.xero.models.payroll.PayRunCalendar.TypeEnum;
 
 import io.swagger.annotations.ApiModelProperty;
 
@@ -95,7 +96,7 @@ public class PayRun {
   /**
    * See PayRun Type
    */
-  public enum TypeEnum {
+  public enum PayRunTypeEnum {
 	@SerializedName("Scheduled")
 	SCHEDULED("Scheduled"),
 	
@@ -107,7 +108,7 @@ public class PayRun {
 
     private String value;
 
-    TypeEnum(String value) {
+    PayRunTypeEnum(String value) {
       this.value = value;
     }
 
@@ -122,8 +123,8 @@ public class PayRun {
     }
 
     @JsonCreator
-    public static TypeEnum fromValue(String text) {
-      for (TypeEnum b : TypeEnum.values()) {
+    public static PayRunTypeEnum fromValue(String text) {
+      for (PayRunTypeEnum b : PayRunTypeEnum.values()) {
         if (String.valueOf(b.value).equals(text)) {
           return b;
         }
@@ -133,59 +134,10 @@ public class PayRun {
   }
 
   @SerializedName("payRunType")
-  private TypeEnum payRunType;
-  
-  /**
-   * See Calendar Type
-   */
-  public enum CalTypeEnum {
-	@SerializedName("Weekly")
-	WEEKLY("Weekly"),
-	  
-	@SerializedName("Fortnightly")
-	FORTNIGHTLY("Fortnightly"),
-	  
-	@SerializedName("FourWeekly")
-	FOURWEEKLY("FourWeekly"),
-	  
-	@SerializedName("Monthly")
-	MONTHLY("Monthly"),
-	  
-	@SerializedName("Annual")
-	ANNUAL("Annual"),
-	  
-	@SerializedName("Quarterly")
-	QUARTERLY("Quarterly");
-
-    private String value;
-
-    CalTypeEnum(String value) {
-      this.value = value;
-    }
-
-    @JsonValue
-    public String getValue() {
-      return value;
-    }
-
-    @Override
-    public String toString() {
-      return String.valueOf(value);
-    }
-
-    @JsonCreator
-    public static CalTypeEnum fromValue(String text) {
-      for (CalTypeEnum b : CalTypeEnum.values()) {
-        if (String.valueOf(b.value).equals(text)) {
-          return b;
-        }
-      }
-      throw new IllegalArgumentException("Unexpected value '" + text + "'");
-    }
-  }
+  private PayRunTypeEnum payRunType;
 
   @SerializedName("CalendarType")
-  private CalTypeEnum calendarType = null;
+  private TypeEnum calendarType = null;
   
   @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("PostedDateTime")
@@ -332,7 +284,7 @@ public class PayRun {
 	 this.payRunStatus = payRunStatus;
   }
 
-  public PayRun payRunType(TypeEnum payRunType) {
+  public PayRun payRunType(PayRunTypeEnum payRunType) {
     this.payRunType = payRunType;
     return this;
   }
@@ -341,14 +293,14 @@ public class PayRun {
    * @return payRunType
   **/
   @ApiModelProperty(required = true, value = "See PayRun Types")
-  public TypeEnum getPayRunType() {
+  public PayRunTypeEnum getPayRunType() {
     return payRunType;
   }
-  public void setPayRunType(TypeEnum payRunType) {
+  public void setPayRunType(PayRunTypeEnum payRunType) {
     this.payRunType = payRunType;
   }
   
-  public PayRun calendarType(CalTypeEnum calendarType) {
+  public PayRun calendarType(TypeEnum calendarType) {
 	this.calendarType = calendarType;
 	return this;
   }
@@ -357,10 +309,10 @@ public class PayRun {
 	* @return calendarType
   **/
   @ApiModelProperty(required = true, value = "See PayRun Calendar Types")
-  public CalTypeEnum getCalendarType() {
+  public TypeEnum getCalendarType() {
 	return calendarType;
   }
-  public void setCalendarType(CalTypeEnum calendarType) {
+  public void setCalendarType(TypeEnum calendarType) {
 	this.calendarType = calendarType;
   }
   
