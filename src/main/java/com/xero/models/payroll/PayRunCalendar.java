@@ -17,7 +17,7 @@ import java.util.UUID;
 import org.threeten.bp.LocalDate;
 import org.threeten.bp.LocalDateTime;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * PayRunCalendar
@@ -35,16 +35,22 @@ public class PayRunCalendar {
    * See Calendar Type
    */
   public enum TypeEnum {
+	  @SerializedName("Weekly")
 	  WEEKLY("Weekly"),
 	  
+	  @SerializedName("Fortnightly")
 	  FORTNIGHTLY("Fortnightly"),
 	  
+	  @SerializedName("FourWeekly")
 	  FOURWEEKLY("FourWeekly"),
 	  
+	  @SerializedName("Monthly")
 	  MONTHLY("Monthly"),
 	  
+	  @SerializedName("Annual")
 	  ANNUAL("Annual"),
 	  
+	  @SerializedName("Quarterly")
 	  QUARTERLY("Quarterly");
 
     private String value;
@@ -74,22 +80,18 @@ public class PayRunCalendar {
     }
   }
 
-  @JsonProperty("calendarType")
+  @SerializedName("calendarType")
   private TypeEnum calendarType;
   
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("periodStartDate")
   private LocalDate periodStartDate;
   
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("periodEndDate")
   private LocalDate periodEndDate;
   
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("paymentDate")
   private LocalDate paymentDate;
   
-  @JsonDeserialize(using = com.xero.api.CustomOffsetDateTimeDeserializer.class)
   @JsonProperty("updatedDateUTC")
   private LocalDateTime updatedDateUTC;
 
@@ -244,15 +246,15 @@ public class PayRunCalendar {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    PayRunCalendar payRun = (PayRunCalendar) o;
-    return Objects.equals(this.payrollCalendarID, payRun.payrollCalendarID) &&
-        Objects.equals(this.name, payRun.name) &&
-        Objects.equals(this.calendarType, payRun.calendarType) &&
-        Objects.equals(this.periodStartDate, payRun.periodStartDate) &&
-        Objects.equals(this.periodEndDate, payRun.periodEndDate) &&
-        Objects.equals(this.paymentDate, payRun.paymentDate) &&
-        Objects.equals(this.updatedDateUTC, payRun.updatedDateUTC) &&
-        Objects.equals(this.validationErrors, payRun.validationErrors);
+    PayRunCalendar payRunCalendar = (PayRunCalendar) o;
+    return Objects.equals(this.payrollCalendarID, payRunCalendar.payrollCalendarID) &&
+        Objects.equals(this.name, payRunCalendar.name) &&
+        Objects.equals(this.calendarType, payRunCalendar.calendarType) &&
+        Objects.equals(this.periodStartDate, payRunCalendar.periodStartDate) &&
+        Objects.equals(this.periodEndDate, payRunCalendar.periodEndDate) &&
+        Objects.equals(this.paymentDate, payRunCalendar.paymentDate) &&
+        Objects.equals(this.updatedDateUTC, payRunCalendar.updatedDateUTC) &&
+        Objects.equals(this.validationErrors, payRunCalendar.validationErrors);
   }
 
   @Override
