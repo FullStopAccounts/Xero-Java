@@ -11,38 +11,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * EmployeeLeave
+ * Leaves
  */
 
-public class EmployeeLeave {
+public class Leaves {
   
-  @JsonProperty("leave")
-  private List<Leave> leave = null;
+  @JsonProperty("leaves")
+  private List<Leave> leaves = null;
 
-  public EmployeeLeave leave(List<Leave> leave) {
-    this.leave = leave;
+  public Leaves leaves(List<Leave> leaves) {
+    this.leaves = leaves;
     return this;
   }
 
-  public EmployeeLeave addLeaveItem(Leave leaveItem) {
-    if (this.leave == null) {
-      this.leave = new ArrayList<Leave>();
+  public Leaves addLeaveItem(Leave leaveItem) {
+    if (this.leaves == null) {
+      this.leaves = new ArrayList<Leave>();
     }
-    this.leave.add(leaveItem);
+    this.leaves.add(leaveItem);
     return this;
   }
 
    /**
-   * Get employees
-   * @return employees
+   * Get leaves
+   * @return leaves
   **/
   @ApiModelProperty(value = "")
-  public List<Leave> getEmployeeLeave() {
-    return leave;
+  public List<Leave> getLeaves() {
+    return leaves;
   }
 
-  public void setEmployeeLeave(List<Leave> leave) {
-    this.leave = leave;
+  public void setLeaves(List<Leave> leaves) {
+    this.leaves = leaves;
   }
 
 
@@ -54,22 +54,22 @@ public class EmployeeLeave {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    EmployeeLeave employeeLeave = (EmployeeLeave) o;
-    return Objects.equals(this.leave, employeeLeave.leave);
+    Leaves leaves = (Leaves) o;
+    return Objects.equals(this.leaves, leaves.leaves);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(leave);
+    return Objects.hash(leaves);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class EmployeeLeave {\n");
+    sb.append("class Leaves {\n");
     
-    sb.append("    leave: ").append(toIndentedString(leave)).append("\n");
+    sb.append("    leaves: ").append(toIndentedString(leaves)).append("\n");
     sb.append("}");
     return sb.toString();
   }

@@ -16,6 +16,8 @@ public class PayrollResponse {
 
  @JsonProperty("Id")
  protected UUID id;
+ @JsonProperty("employeeID")
+ protected UUID employeeID;
  @JsonProperty("ProviderName")
  protected String providerName;
  @JsonProperty("DateTimeUTC")
@@ -39,7 +41,7 @@ public class PayrollResponse {
  @JsonProperty("OpeningBalances")
  protected OpeningBalances openingBalances;
  @JsonProperty("Leave")
- protected EmployeeLeave leave;
+ protected List<Leave> leave;
  @JsonProperty("LeaveBalance")
  protected LeaveBalance leaveBalance;
  @JsonProperty("LeaveBalances")
@@ -54,8 +56,14 @@ public class PayrollResponse {
  protected LeaveType leaveType;
  @JsonProperty("LeaveTypes")
  protected List<LeaveType> leaveTypes;
- @JsonProperty("payTemplates")
- protected PayTemplate payTemplates;
+ @JsonProperty("earningTemplates")
+ protected List<EarningsTemplate> earningTemplates;
+ @JsonProperty("deductionTemplates")
+ protected List<EarningsTemplate> deductionTemplates;
+ @JsonProperty("benefitTemplates")
+ protected List<EarningsTemplate> benefitTemplates;
+ @JsonProperty("reimbursementTemplates")
+ protected List<EarningsTemplate> reimbursementTemplates;
  @JsonProperty("Deduction")
  protected Deduction deduction;
  @JsonProperty("Deductions")
@@ -110,6 +118,14 @@ public class PayrollResponse {
  }
 
 
+ public UUID getEmployeeID() {
+	 return employeeID;
+ }
+ public void setEmployeeID(UUID employeeID) {
+	 this.employeeID = employeeID;
+ }
+ 
+ 
  public String getProviderName() {
      return providerName;
  }
@@ -198,10 +214,10 @@ public class PayrollResponse {
  }
  
  
- public EmployeeLeave getLeave() {
+ public List<Leave> getLeave() {
 	 return leave;
  }
- public void setLeave(EmployeeLeave leave) {
+ public void setLeave(List<Leave> leave) {
 	 this.leave = leave;
  }
  
@@ -245,12 +261,36 @@ public class PayrollResponse {
 	 this.leavePeriods = leavePeriods;
  }
  
- 
- public PayTemplate getPayTemplates() {
-	 return payTemplates;
+
+ public List<EarningsTemplate> getEarningTemplates() {
+	 return earningTemplates;
  }
- public void setPayTemplates(PayTemplate payTemplates) {
-	 this.payTemplates = payTemplates;
+ public void setEarningTemplates(List<EarningsTemplate> earningTemplates) {
+	 this.earningTemplates = earningTemplates;
+ }
+ 
+ 
+ public List<EarningsTemplate> getDeductionTemplates() {
+	 return deductionTemplates;
+ }
+ public void setDeductionTemplates(List<EarningsTemplate> deductionTemplates) {
+	 this.deductionTemplates = deductionTemplates;
+ }
+ 
+ 
+ public List<EarningsTemplate> getBenefitTemplates() {
+	 return benefitTemplates;
+ }
+ public void setBenefitTemplates(List<EarningsTemplate> benefitTemplates) {
+	 this.benefitTemplates = benefitTemplates;
+ }
+ 
+ 
+ public List<EarningsTemplate> getReimbursementTemplates() {
+	 return reimbursementTemplates;
+ }
+ public void setReimbursementTemplates(List<EarningsTemplate> reimbursementTemplates) {
+	 this.reimbursementTemplates = reimbursementTemplates;
  }
  
  
@@ -411,6 +451,22 @@ public class PayrollResponse {
  }
  public void setPaySlips(List<PaySlip> paySlips) {
 	 this.paySlips = paySlips;
+ }
+ 
+ 
+ public Accounts getSettings() {
+	 return settings;
+ }
+ public void setSettings(Accounts settings) {
+	 this.settings = settings;
+ }
+ 
+ 
+ public List<Account> getAccounts() {
+	 return accounts;
+ }
+ public void setAccounts(List<Account> accounts) {
+	 this.accounts = accounts;
  }
  
  

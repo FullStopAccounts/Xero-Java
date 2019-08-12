@@ -1,7 +1,5 @@
 package com.xero.api;
 
-import java.time.LocalDate;
-
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
 public class CustomDateModule extends SimpleModule {
