@@ -11,38 +11,38 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * StatutoryLeaves
+ * Timesheets
  */
 
 public class Timesheets {
   
-  @JsonProperty("statutoryLeaves")
-  private List<StatutoryLeave> statutoryLeaves = null;
+  @JsonProperty("timesheets")
+  private List<Timesheet> timesheets = null;
 
-  public Timesheets statutoryLeaves(List<StatutoryLeave> statutoryLeaves) {
-    this.statutoryLeaves = statutoryLeaves;
+  public Timesheets timesheets(List<Timesheet> timesheets) {
+    this.timesheets = timesheets;
     return this;
   }
 
-  public Timesheets addStatutoryLeavesItem(StatutoryLeave statutoryLeavesItem) {
-    if (this.statutoryLeaves == null) {
-      this.statutoryLeaves = new ArrayList<StatutoryLeave>();
+  public Timesheets addTimesheetsItem(Timesheet timesheetsItem) {
+    if (this.timesheets == null) {
+      this.timesheets = new ArrayList<Timesheet>();
     }
-    this.statutoryLeaves.add(statutoryLeavesItem);
+    this.timesheets.add(timesheetsItem);
     return this;
   }
 
    /**
-   * Get statutoryLeaves
-   * @return statutoryLeaves
+   * Get timesheets
+   * @return timesheets
   **/
   @ApiModelProperty(value = "")
-  public List<StatutoryLeave> getStatutoryLeaves() {
-    return statutoryLeaves;
+  public List<Timesheet> getTimesheets() {
+    return timesheets;
   }
 
-  public void setStatutoryLeaves(List<StatutoryLeave> statutoryLeaves) {
-    this.statutoryLeaves = statutoryLeaves;
+  public void setTimesheets(List<Timesheet> timesheets) {
+    this.timesheets = timesheets;
   }
 
 
@@ -54,22 +54,22 @@ public class Timesheets {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    Timesheets statutoryLeaves = (Timesheets) o;
-    return Objects.equals(this.statutoryLeaves, statutoryLeaves.statutoryLeaves);
+    Timesheets timesheets = (Timesheets) o;
+    return Objects.equals(this.timesheets, timesheets.timesheets);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(statutoryLeaves);
+    return Objects.hash(timesheets);
   }
 
 
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
-    sb.append("class StatutoryLeaves {\n");
+    sb.append("class Timesheets {\n");
     
-    sb.append("    statutoryLeaves: ").append(toIndentedString(statutoryLeaves)).append("\n");
+    sb.append("    timesheets: ").append(toIndentedString(timesheets)).append("\n");
     sb.append("}");
     return sb.toString();
   }

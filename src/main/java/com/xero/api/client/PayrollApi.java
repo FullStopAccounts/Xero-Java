@@ -11,6 +11,7 @@ import com.xero.api.exception.XeroExceptionHandler;
 import com.xero.model.*;
 import com.xero.models.payroll.*;
 import com.xero.models.payroll.Employee;
+import com.xero.models.payroll.TrackingCategories;
 import com.xero.api.*;
 
 import org.apache.logging.log4j.LogManager;
@@ -632,9 +633,279 @@ public class PayrollApi {
     }
     
     /**
-     * Allows you to retrieve PayRun in a Xero organisation
+     * Allows you to retrieve details of an earning rate in a Xero organisation
+     * <p><b>200</b> - Success - return response of type EarningsRate
+     * @param earningsRateID - Unique identifier for a EarningsRate
+     * @return EarningsRate
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public EarningsRate getEarningRate(UUID earningsRateID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/earningsRates/{EarningsRateID}";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/earningsRates/{EarningsRateID}";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase())) {
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("EarningsRateID", earningsRateID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		return pr.getEarningsRate();        
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(), JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve details of a leave type in a Xero organisation 
+     * <p><b>200</b> - Success - return response of type LeaveType
+     * @param leavetypeID - Unique identifier for a LeaveType
+     * @return LeaveType
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public LeaveType getLeaveType(UUID leavetypeID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/leaveTypes/{leavetypeID}";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/leaveTypes/{leavetypeID}";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase())) {
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("leavetypeID", leavetypeID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		return pr.getLeaveType();      
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(), JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve details of a reimbursement in a Xero organisation 
+     * <p><b>200</b> - Success - return response of type Reimbursement
+     * @param reimbursementID - Unique identifier for a Reimbursement
+     * @return Reimbursement
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public Reimbursement getReimbursement(UUID reimbursementID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/reimbursements/{ReimbursementID}";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/reimbursements/{ReimbursementID}";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase())) {
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("ReimbursementID", reimbursementID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		return pr.getReimbursement();      
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(), JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve a Payroll Timesheet in a Xero organisation using timesheet identifier
+     * <p><b>200</b> - Success - return response of type Timesheet
+     * @param timesheetID - Unique identifier for a Timesheet
+     * @return Timesheet
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public Timesheet getTimesheet(UUID timesheetID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/Timesheet/{TimesheetID}";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/Timesheet/{TimesheetID}";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase())) {
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("TimesheetID", timesheetID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		return pr.getTimesheet();      
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(), JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve payment method for a payroll employee
+     * <p><b>200</b> - Success - return response of type PaymentMethod
+     * @param employeeID - Unique identifier for an employee
+     * @return PaymentMethod
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public PaymentMethod getPaymentMethod(UUID employeeID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/employees/{employeeID}/paymentMethods";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/employees/{employeeID}/paymentMethods";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase())) {
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("employeeID", employeeID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		return pr.getPaymentMethod();      
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(), JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve details of a pay run calendar in a Xero organisation
+     * <p><b>200</b> - Success - return response of type PayRunCalendar
+     * @param payruncalendarID Unique identifier for a PayRunCalendar
+     * @return PayRunCalendar
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public PayRunCalendar getPayRunCalendar(UUID payruncalendarID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/payRunCalendars/{payruncalendarID}";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/payRunCalendars/{payruncalendarID}";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase()))
+    		{
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("payruncalendarID", payruncalendarID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+
+    		return pr.getPayRunCalendar();          
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve detailed information of a salary and wages record for an employee by its unique identifier
+     * <p><b>200</b> - Success - return response of type SalaryAndWage
+     * @param employeeID - Unique identifier for an Employee
+     * @param salaryandwagesID - Unique identifier for a SalaryAndWage
+     * @return SalaryAndWage
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public SalaryAndWage getSalaryAndWageByID(UUID employeeID, UUID salaryandwagesID) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/employees/{EmployeeID}/salaryAndWages/{salaryandwagesID}";
+    		// Hacky path manipulation to support different return types from same endpoint
+    		String path = "/employees/{EmployeeID}/salaryAndWages/{salaryandwagesID}";
+    		String type = "/pdf";
+    		if(path.toLowerCase().contains(type.toLowerCase()))
+    		{
+    			correctPath = path.replace("/pdf","");
+    		} 
+
+    		// create a map of path variables
+    		final Map<String, String> uriVariables = new HashMap<String, String>();
+    		uriVariables.put("EmployeeID", employeeID.toString());
+    		uriVariables.put("salaryandwagesID", salaryandwagesID.toString());
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+
+    		return pr.getSalaryAndWages().get(0);          
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve details of a pay run in a Xero organisation
      * <p><b>200</b> - Success - return response of type PayRun
-     * @param payRunID Unique identifier for a PayRun
+     * @param payRunID - Unique identifier for a PayRun
      * @return PayRun
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
@@ -673,9 +944,9 @@ public class PayrollApi {
      
      /**
       * Allows you to retrieve a specific PaySlip in a Xero organisation
-      * <p><b>200</b> - Success - return response of type PaySlips array with a unique PaySlip
-      * @param paySlipID Unique identifier for a PaySlip
-      * @return PaySlips
+      * <p><b>200</b> - Success - return response of type PaySlip
+      * @param paySlipID - Unique identifier for a PaySlip
+      * @return PaySlip
       * @throws IOException if an error occurs while attempting to invoke the API
       **/
     public PaySlip getPaySlip(UUID paySlipID) throws IOException {
@@ -715,7 +986,7 @@ public class PayrollApi {
     /**
      * Allows you to retrieve all the employer pensions in Payroll for a Xero organisation
      * <p><b>200</b> - Success - return response of type Benefits array with 0 to N Benefit
-     * @param page e.g. page&#x3D;1 - Up to 100 benefits will be returned in a single API call.
+     * @param page - Up to 100 benefits will be returned in a single API call.
      * @return Benefits
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
@@ -750,7 +1021,7 @@ public class PayrollApi {
     /**
      * Allows you to retrieve payroll employees in a Xero organisation 
      * <p><b>200</b> - Success - return response of type Employees array with 0 to N Employee
-     * @param page e.g. page&#x3D;1 - Up to 100 employees will be returned in a single API call.
+     * @param page - Up to 100 employees will be returned in a single API call.
      * @param firstName - string for employee first name
      * @param lastName - string for employee last name
      * @return Employees
@@ -1011,7 +1282,7 @@ public class PayrollApi {
     /**
      * Allows you to retrieve deductions in a Xero organisation
      * <p><b>200</b> - Success - return response of type Deductions array with 0 to N Deduction
-     * @param page e.g. page&#x3D;1 - Up to 100 deductions will be returned in a single API call.
+     * @param page - Up to 100 deductions will be returned in a single API call.
      * @return Deductions
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
@@ -1046,7 +1317,7 @@ public class PayrollApi {
     /**
      * Allows you to retrieve all the earnings orders (statutory deductions) in Payroll for a Xero organisation
      * <p><b>200</b> - Success - return response of type StatutoryDeductions array with 0 to N StatutoryDeduction
-     * @param page e.g. page&#x3D;1 - Up to 100 StatutoryDeductions will be returned in a single API call.
+     * @param page - Up to 100 StatutoryDeductions will be returned in a single API call.
      * @return StatutoryDeductions
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
@@ -1079,9 +1350,9 @@ public class PayrollApi {
     }
 
     /**
-     * Allows you to retrieve earningsRates in a Xero organisation
+     * Allows you to retrieve payroll earning rates in a Xero organisation
      * <p><b>200</b> - Success - return response of type EarningsRates array with 0 to N EarningsRate
-     * @param page e.g. page&#x3D;1 - Up to 100 earningsRates will be returned in a single API call.
+     * @param page - Up to 100 earningsRates will be returned in a single API call.
      * @return EarningsRates
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
@@ -1114,13 +1385,14 @@ public class PayrollApi {
     }
 
     /**
-     * Allows you to retrieve all Leave Types
+     * Allows you to retrieve payroll leave types in a Xero organisation
      * <p><b>200</b> - Success - return response of type LeaveTypes array with all LeaveType
-     * @param page e.g. page&#x3D;1 - Up to 100 leave types will be returned in a single API call.
+     * @param page - Up to 100 leave types will be returned in a single API call.
+     * @param activeOnly - It filters leave types by active status.
      * @return LeaveTypes
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
-    public LeaveTypes getLeaveTypes(Integer page) throws IOException {
+    public LeaveTypes getLeaveTypes(Integer page, Boolean activeOnly) throws IOException {
     	try {
     		String strBody = null;
     		Map<String, String> params = null;
@@ -1130,6 +1402,8 @@ public class PayrollApi {
     		params = new HashMap<>();
     		if (page != null) {
     			addToMapIfNotNull(params, "page", page);
+    		}if (activeOnly != null) {
+    			addToMapIfNotNull(params, "activeOnly", activeOnly);
     		}
 
     		String response = this.DATA(url, strBody, params, "GET");
@@ -1149,9 +1423,85 @@ public class PayrollApi {
     }
     
     /**
+     * Allows you to retrieve payroll all reimbursements in a Xero organisation 
+     * <p><b>200</b> - Success - return response of type Reimbursements array with all Reimbursements
+     * @param page - Up to 100 reimbursements will be returned in a single API call.
+     * @return Reimbursements
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public Reimbursements getReimbursements(Integer page) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/reimbursements";
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.build().toString();
+    		params = new HashMap<>();
+    		if (page != null) {
+    			addToMapIfNotNull(params, "page", page);
+    		}
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		Reimbursements r = new Reimbursements();
+    		r.setReimbursements(pr.getReimbursements());
+    		
+    		return r;          
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
+     * Allows you to retrieve payroll all reimbursements in a Xero organisation 
+     * <p><b>200</b> - Success - return response of type Timesheets array with all Timesheets
+     * @param page - Up to 100 timesheets will be returned in a single API call.
+     * @param employeeId - gets only the timesheets of a particular employee
+     * @param payrollCalendarId - filters the timesheets by payroll calendar id
+     * @return Timesheets
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+    public Timesheets getTimesheets(Integer page, UUID employeeId, UUID payrollCalendarId) throws IOException {
+    	try {
+    		String strBody = null;
+    		Map<String, String> params = null;
+    		String correctPath = "/timesheets";
+    		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+    		String url = uriBuilder.build().toString();
+    		params = new HashMap<>();
+    		if (page != null) {
+    			addToMapIfNotNull(params, "page", page);
+    		}if (employeeId != null) {
+    			addToMapIfNotNull(params, "employeeId", employeeId);
+    		}if (payrollCalendarId != null) {
+    			addToMapIfNotNull(params, "payrollCalendarId", payrollCalendarId);
+    		}
+
+    		String response = this.DATA(url, strBody, params, "GET");
+
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		Timesheets ts = new Timesheets();
+    		ts.setTimesheets(pr.getTimesheets());
+    		
+    		return ts;          
+
+    	} catch (IOException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+    	} catch (XeroApiException e) {
+    		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+    	}
+    }
+    
+    /**
      * Allows you to retrieve all Pay Run Calendars
      * <p><b>200</b> - Success - return response of type PayRunCalendars array with all PayRunCalendar
-     * @param page e.g. page&#x3D;1 - Up to 100 Pay Run Calendars will be returned in a single API call.
+     * @param page - Up to 100 Pay Run Calendars will be returned in a single API call.
      * @return PayRunCalendars
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
@@ -1186,8 +1536,8 @@ public class PayrollApi {
     /**
      * Allows you to retrieve SalaryAndWages for an employee
      * <p><b>200</b> - Success - return response of type SalaryAndWages array with a unique SalaryAndWage
-     * @param employeeID Unique identifier for an employee
-     * @param page e.g. page&#x3D;1 - Up to 100 Salary And Wages will be returned in a single API call.
+     * @param employeeID - Unique identifier for an employee
+     * @param page - Up to 100 Salary And Wages will be returned in a single API call.
      * @return SalaryAndWages
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
@@ -1232,14 +1582,12 @@ public class PayrollApi {
     /**
      * Allows you to retrieve all PayRuns
      * <p><b>200</b> - Success - return response of type PayRuns array with all PayRun
-     * @param ifModifiedSince Only records created or modified since this timestamp will be returned
-     * @param where Filter by an any element
-     * @param order Order by an any element
-     * @param page e.g. page&#x3D;1 - Up to 100 PayRuns will be returned in a single API call.
+     * @param page - Up to 100 PayRuns will be returned in a single API call.
+     * @param status - filter the payruns by status
      * @return PayRuns
      * @throws IOException if an error occurs while attempting to invoke the API
      **/
-    public PayRuns getPayRuns(OffsetDateTime ifModifiedSince, String where, String order, Integer page) throws IOException {
+    public PayRuns getPayRuns(Integer page, String status) throws IOException {
     	try {
     		String strBody = null;
     		Map<String, String> params = null;
@@ -1248,15 +1596,13 @@ public class PayrollApi {
             String url = uriBuilder.build().toString();
             
             params = new HashMap<>();
-            if (where != null) {
-                addToMapIfNotNull(params, "where", where);
-            }if (order != null) {
-                addToMapIfNotNull(params, "order", order);
-            }if (page != null) {
+            if (page != null) {
                 addToMapIfNotNull(params, "page", page);
+            }if (status != null) {
+                addToMapIfNotNull(params, "status", status);
             }
 
-    		String response = this.DATA(url, strBody, params, "GET", ifModifiedSince);
+    		String response = this.DATA(url, strBody, params, "GET");
     		
     		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
     		
@@ -1275,11 +1621,12 @@ public class PayrollApi {
      /**
       * Allows you to retrieve detailed information for payslips in the payrun
       * <p><b>200</b> - Success - return response of type PaySlips array
-      * @param payrunId Filter by
+      * @param payrunId - PayrunID which specifies the containing payrun of payslips to retrieve
+      * @param page - Up to 100 PaySlips will be returned in a single API call
       * @return PaySlips
       * @throws IOException if an error occurs while attempting to invoke the API
       **/
-    public PaySlips getPaySlips(String payrunId) throws IOException {
+    public PaySlips getPaySlipsByPayrunID(String payrunId, Integer page) throws IOException {
     	try {
     		String strBody = null;
     		Map<String, String> params = null;
@@ -1306,6 +1653,63 @@ public class PayrollApi {
     		throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
     	}
     }
+   
+     /**
+      * Allows you to get Account Settings information from a Xero organisation 
+      * <p><b>200</b> - Success - return response of type Settings
+      * @return Settings
+      * @throws IOException if an error occurs while attempting to invoke the API
+      **/
+    public Settings getSettings() throws IOException {
+		try {
+			String strBody = null;
+			Map<String, String> params = null;
+			String correctPath = "/Settings";
+			UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+			String url = uriBuilder.build().toString();
+
+			String response = this.DATA(url, strBody, params, "GET");
+
+			PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+
+			Settings s = new Settings();
+			s.setAccounts(pr.getSettings().getAccounts());
+
+			return s;
+
+		} catch (IOException e) {
+			throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+		} catch (XeroApiException e) {
+			throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+		}
+    }
+    
+    /**
+     * Allows you to get a tracking categories information from a Xero organisation 
+     * <p><b>200</b> - Success - return response of type TrackingCategories
+     * @return TrackingCategories
+     * @throws IOException if an error occurs while attempting to invoke the API
+     **/
+   public TrackingCategories getTrackingCategories() throws IOException {
+		try {
+			String strBody = null;
+			Map<String, String> params = null;
+			String correctPath = "/settings/trackingCategories";
+			UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
+			String url = uriBuilder.build().toString();
+
+			String response = this.DATA(url, strBody, params, "GET");
+
+			PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+
+			return pr.getTrackingCategories();
+
+		} catch (IOException e) {
+			throw xeroExceptionHandler.handleBadRequest(e.getMessage());
+		} catch (XeroApiException e) {
+			throw xeroExceptionHandler.handleBadRequest(e.getMessage(), e.getResponseCode(),JSONUtils.isJSONValid(e.getMessage()));
+		}
+   }
 
     protected void addToMapIfNotNull(Map<String, String> map, String key, Object value) {
         if (value != null) {
