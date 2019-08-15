@@ -338,19 +338,22 @@ public class Employee {
         Objects.equals(this.firstName, employee.firstName) &&
         Objects.equals(this.lastName, employee.lastName) &&
         Objects.equals(this.dateOfBirth, employee.dateOfBirth) &&
+        Objects.equals(this.gender, employee.gender) &&
         Objects.equals(this.email, employee.email) &&
         Objects.equals(this.phoneNumber, employee.phoneNumber) &&
         Objects.equals(this.startDate, employee.startDate) &&
+        Objects.equals(this.nationalInsuranceNumber, employee.nationalInsuranceNumber) &&
+        Objects.equals(this.address, employee.address) &&
         Objects.equals(this.payrollCalendarID, employee.payrollCalendarID) &&
         Objects.equals(this.updatedDateUTC, employee.updatedDateUTC) &&
         Objects.equals(this.createdDateUTC, employee.createdDateUTC) &&
         Objects.equals(this.endDate, employee.endDate) &&
         Objects.equals(this.validationErrors, employee.validationErrors);
   }
-
+ 
   @Override
   public int hashCode() {
-    return Objects.hash(employeeID, firstName, lastName, dateOfBirth, email, phoneNumber, startDate, payrollCalendarID, updatedDateUTC, createdDateUTC, endDate, validationErrors);
+    return Objects.hash(employeeID, firstName, lastName, dateOfBirth, gender, email, phoneNumber, startDate, nationalInsuranceNumber, address, payrollCalendarID, updatedDateUTC, createdDateUTC, endDate, validationErrors);
   }
 
 
@@ -363,9 +366,12 @@ public class Employee {
     sb.append("    firstName: ").append(toIndentedString(firstName)).append("\n");
     sb.append("    lastName: ").append(toIndentedString(lastName)).append("\n");
     sb.append("    dateOfBirth: ").append(toIndentedString(dateOfBirth)).append("\n");
+    sb.append("    gender: ").append(toIndentedString(gender)).append("\n");
     sb.append("    email: ").append(toIndentedString(email)).append("\n");
     sb.append("    phoneNumber: ").append(toIndentedString(phoneNumber)).append("\n");
     sb.append("    startDate: ").append(toIndentedString(startDate)).append("\n");
+    sb.append("    nationalInsuranceNumber: ").append(toIndentedString(nationalInsuranceNumber)).append("\n");
+    sb.append("    address: ").append(toIndentedString(address)).append("\n");
     sb.append("    payrollCalendarID: ").append(toIndentedString(payrollCalendarID)).append("\n");
     sb.append("    updatedDateUTC: ").append(toIndentedString(updatedDateUTC)).append("\n");
     sb.append("    createdDateUTC: ").append(toIndentedString(createdDateUTC)).append("\n");
