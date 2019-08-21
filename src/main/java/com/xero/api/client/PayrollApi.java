@@ -414,8 +414,13 @@ public class PayrollApi {
     		Gson newgson = gsonBuilder.create();
     		
     		PayrollResponse pr = newgson.fromJson(response, PayrollResponse.class);
+    		
+    		Leave lv = new Leave();
+    		if(pr.getLeave() != null && pr.getLeave().size() > 0) {
+    			lv = pr.getLeave().get(0);
+    		}
 
-    		return pr.getLeave().get(0);    
+    		return lv;    
     		
     	} catch (IOException e) {
     		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
@@ -892,8 +897,13 @@ public class PayrollApi {
     		String response = this.DATA(url, strBody, params, "GET");
 
     		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
+    		
+    		SalaryAndWage sw = new SalaryAndWage();
+    		if(pr.getSalaryAndWages() != null && pr.getSalaryAndWages().size() > 0) {
+    			sw = pr.getSalaryAndWages().get(0);
+    		}
 
-    		return pr.getSalaryAndWages().get(0);          
+    		return sw;          
 
     	} catch (IOException e) {
     		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
