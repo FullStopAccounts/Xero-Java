@@ -6,10 +6,7 @@ package com.xero.models.payroll;
 
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.xero.models.accounting.ValidationError;
 import io.swagger.annotations.ApiModelProperty;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Address
@@ -34,10 +31,6 @@ public class Address {
   
   @JsonProperty("postCode")
   private String postCode;
- 
-  @JsonProperty("validationErrors")
-  private List<ValidationError> validationErrors = null;
-  
   
   public Address addressLine1(String addressLine1) {
 	 this.addressLine1 = addressLine1;
@@ -134,33 +127,6 @@ public class Address {
   public void setPostCode(String postCode) {
     this.postCode = postCode;
   }
-  
-  public Address validationErrors(List<ValidationError> validationErrors) {
-    this.validationErrors = validationErrors;
-    return this;
-  }
-
-  public Address addValidationErrorsItem(ValidationError validationErrorsItem) {
-    if (this.validationErrors == null) {
-      this.validationErrors = new ArrayList<ValidationError>();
-    }
-    this.validationErrors.add(validationErrorsItem);
-    return this;
-  }
-
-   /**
-   * Displays array of validation error messages from the API
-   * @return validationErrors
-  **/
-  @ApiModelProperty(value = "Displays array of validation error messages from the API")
-  public List<ValidationError> getValidationErrors() {
-    return validationErrors;
-  }
-
-  public void setValidationErrors(List<ValidationError> validationErrors) {
-    this.validationErrors = validationErrors;
-  }
-
 
   @Override
   public boolean equals(java.lang.Object o) {
@@ -176,13 +142,12 @@ public class Address {
         Objects.equals(this.city, address.city) &&
         Objects.equals(this.County, address.County) &&
         Objects.equals(this.countryName, address.countryName) &&
-        Objects.equals(this.postCode, address.postCode) &&
-        Objects.equals(this.validationErrors, address.validationErrors);
+        Objects.equals(this.postCode, address.postCode);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addressLine1, addressLine2, city, County, countryName, postCode, validationErrors);
+    return Objects.hash(addressLine1, addressLine2, city, County, countryName, postCode);
   }
 
 
@@ -197,7 +162,6 @@ public class Address {
     sb.append("    County: ").append(toIndentedString(County)).append("\n");
     sb.append("    countryName: ").append(toIndentedString(countryName)).append("\n");
     sb.append("    postCode: ").append(toIndentedString(postCode)).append("\n");
-    sb.append("    validationErrors: ").append(toIndentedString(validationErrors)).append("\n");
     sb.append("}");
     return sb.toString();
   }
