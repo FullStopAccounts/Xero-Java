@@ -20,6 +20,8 @@ public interface Config {
     String getAssetsUrl();
     
     String getBankFeedsUrl();
+    
+    String getPayrollUrl();
 
     String getRequestTokenUrl();
 

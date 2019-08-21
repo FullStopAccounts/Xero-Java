@@ -26,8 +26,11 @@ public class Address {
   @JsonProperty("city")
   private String city;
 
-  @JsonProperty("county")
-  private String county;
+  @JsonProperty("County")
+  private String County;
+  
+  @JsonProperty("countryName")
+  private String countryName;
   
   @JsonProperty("postCode")
   private String postCode;
@@ -84,20 +87,36 @@ public class Address {
     this.city = city;
   }
   
-  public Address county(String county) {
-    this.county = county;
+  public Address County(String County) {
+    this.County = County;
     return this;
   }
   /**
    * County for employee home address
-   * @return county
+   * @return County
   **/
   @ApiModelProperty(value = "County for employee home address")
   public String getCounty() {
-    return county;
+    return County;
   }
-  public void setCounty(String county) {
-    this.county = county;
+  public void setCounty(String County) {
+    this.County = County;
+  }
+  
+  public Address countryName(String countryName) {
+    this.countryName = countryName;
+    return this;
+  }
+  /**
+   * Country Name for employee home address
+   * @return countryName
+  **/
+  @ApiModelProperty(value = "Country Name for employee home address")
+  public String getCountryName() {
+    return countryName;
+  }
+  public void setCountryName(String countryName) {
+    this.countryName = countryName;
   }
   
   public Address postCode(String postCode) {
@@ -155,14 +174,15 @@ public class Address {
     return Objects.equals(this.addressLine1, address.addressLine1) &&
         Objects.equals(this.addressLine2, address.addressLine2) &&
         Objects.equals(this.city, address.city) &&
-        Objects.equals(this.county, address.county) &&
+        Objects.equals(this.County, address.County) &&
+        Objects.equals(this.countryName, address.countryName) &&
         Objects.equals(this.postCode, address.postCode) &&
         Objects.equals(this.validationErrors, address.validationErrors);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(addressLine1, addressLine2, city, county, postCode, validationErrors);
+    return Objects.hash(addressLine1, addressLine2, city, County, countryName, postCode, validationErrors);
   }
 
 
@@ -174,7 +194,8 @@ public class Address {
     sb.append("    addressLine1: ").append(toIndentedString(addressLine1)).append("\n");
     sb.append("    addressLine2: ").append(toIndentedString(addressLine2)).append("\n");
     sb.append("    city: ").append(toIndentedString(city)).append("\n");
-    sb.append("    county: ").append(toIndentedString(county)).append("\n");
+    sb.append("    County: ").append(toIndentedString(County)).append("\n");
+    sb.append("    countryName: ").append(toIndentedString(countryName)).append("\n");
     sb.append("    postCode: ").append(toIndentedString(postCode)).append("\n");
     sb.append("    validationErrors: ").append(toIndentedString(validationErrors)).append("\n");
     sb.append("}");

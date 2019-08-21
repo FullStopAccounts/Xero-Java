@@ -18,9 +18,8 @@ import com.xero.models.accounting.Contacts;
 import com.xero.models.accounting.CreditNotes;
 import com.xero.models.accounting.Currencies;
 import com.xero.models.accounting.Employees;
-import com.xero.models.accounting.Error;
 import com.xero.models.accounting.ExpenseClaims;
-import java.io.File;
+
 import com.xero.models.accounting.HistoryRecords;
 import com.xero.models.accounting.InvoiceReminders;
 import com.xero.models.accounting.Invoices;
@@ -56,9 +55,6 @@ import com.xero.api.exception.XeroExceptionHandler;
 import com.xero.model.*;
 import com.xero.api.*;
 
-import org.threeten.bp.LocalDate;
-import org.threeten.bp.OffsetDateTime;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,9 +62,7 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.TimeZone;
 import java.util.regex.Pattern;
@@ -2157,8 +2151,7 @@ public class AccountingApi {
 
             
             String response = this.DATA(url, strBody, params, "DELETE");
-
-                       
+            System.out.println(response);
 
         } catch (IOException e) {
             throw xeroExceptionHandler.handleBadRequest(e.getMessage());
@@ -2192,9 +2185,8 @@ public class AccountingApi {
             String url = uriBuilder.buildFromMap(uriVariables).toString();
 
             
-            String response = this.DATA(url, strBody, params, "DELETE");
-
-                       
+            String response = this.DATA(url, strBody, params, "DELETE");   
+            System.out.println(response);
 
         } catch (IOException e) {
             throw xeroExceptionHandler.handleBadRequest(e.getMessage());
@@ -2230,8 +2222,7 @@ public class AccountingApi {
 
             
             String response = this.DATA(url, strBody, params, "DELETE");
-
-                       
+            System.out.println(response);
 
         } catch (IOException e) {
             throw xeroExceptionHandler.handleBadRequest(e.getMessage());
@@ -2267,9 +2258,8 @@ public class AccountingApi {
 
             
             String response = this.DATA(url, strBody, params, "DELETE");
-
+            System.out.println(response);
                        
-
         } catch (IOException e) {
             throw xeroExceptionHandler.handleBadRequest(e.getMessage());
         } catch (XeroApiException e) {
@@ -2429,8 +2419,7 @@ public class AccountingApi {
             strBody = apiClient.getObjectMapper().writeValueAsString(requestEmpty);
 
             String response = this.DATA(url, strBody, params, "POST");
-
-                       
+            System.out.println(response);       
 
         } catch (IOException e) {
             throw xeroExceptionHandler.handleBadRequest(e.getMessage());

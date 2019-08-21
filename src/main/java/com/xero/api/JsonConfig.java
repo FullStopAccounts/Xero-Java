@@ -26,6 +26,7 @@ public class JsonConfig implements Config {
   private String FILES_ENDPOINT_URL = "https://api.xero.com/files.xro/1.0/";
   private String ASSETS_ENDPOINT_URL = "https://api.xero.com/assets.xro/1.0";
   private String BANKFEEDS_ENDPOINT_URL = "https://api.xero.com/bankfeeds.xro/1.0";
+  private String PAYROLL_ENDPOINT_URL = "https://api.xero.com/payroll.xro/2.0/";
   private String REQUEST_TOKEN_URL = "https://api.xero.com/oauth/RequestToken";
   private String AUTHENTICATE_URL = "https://api.xero.com/oauth/Authorize";
   private String ACCESS_TOKEN_URL = "https://api.xero.com/oauth/AccessToken";
@@ -33,6 +34,7 @@ public class JsonConfig implements Config {
   private String FILES_ENDPOINT_STEM = "/files.xro/1.0/";
   private String ASSETS_ENDPOINT_STEM = "/assets.xro/1.0/";
   private String BANKFEEDS_ENDPOINT_STEM = "/bankfeeds.xro/1.0/";
+  private String PAYROLL_ENDPOINT_STEM = "/payroll.xro/2.0/";
   private String REQUEST_TOKEN_STEM = "/oauth/RequestToken";
   private String AUTHENTICATE_STEM = "/oauth/Authorize";
   private String ACCESS_TOKEN_STEM = "/oauth/AccessToken";
@@ -114,6 +116,11 @@ public class JsonConfig implements Config {
   public String getBankFeedsUrl() {
     return BANKFEEDS_ENDPOINT_URL;
   }  
+  
+  @Override
+  public String getPayrollUrl() {
+    return PAYROLL_ENDPOINT_URL;
+  } 
 
   @Override
   public String getRequestTokenUrl() {
@@ -338,6 +345,13 @@ public class JsonConfig implements Config {
 	    	  	BANKFEEDS_ENDPOINT_URL = API_BASE_URL + BankFeedsEndpointPath;
 	      } else {
 	    	  BANKFEEDS_ENDPOINT_URL = API_BASE_URL + BANKFEEDS_ENDPOINT_STEM;
+	      }
+	      
+	      if (jsonObject.containsKey("PayrollEndpointPath")) {
+	    	  	String PayrollEndpointPath = (String) jsonObject.get("PayrollEndpointPath");
+	    	  	PAYROLL_ENDPOINT_URL = API_BASE_URL + PayrollEndpointPath;
+	      } else {
+	    	  PAYROLL_ENDPOINT_URL = API_BASE_URL + PAYROLL_ENDPOINT_STEM;
 	      }
 	      
 	      if (jsonObject.containsKey("RequestTokenPath")) {

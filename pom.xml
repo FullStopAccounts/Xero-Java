@@ -150,7 +150,7 @@
 		</dependency>
 	</dependencies>
 	<build>
-		<finalName>Xero-Java-SDK</finalName>
+		<finalName>xero-java-sdk-2.4.0</finalName>
 		<plugins>	
 			<plugin>
 				<artifactId>maven3-deploy-plugin</artifactId>
