@@ -369,6 +369,8 @@ public class OAuthRequestResource {
 		        		throw e;
 		        }
 		        
+		        System.out.println(content);
+		        
 		        Map<String, String> responseMap = new HashMap<>();
 		        addToMapIfNotNull(responseMap, "content", content);
 		        addToMapIfNotNull(responseMap, "code", code);

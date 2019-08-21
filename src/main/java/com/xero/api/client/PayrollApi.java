@@ -1037,10 +1037,17 @@ public class PayrollApi {
     		params = new HashMap<>();
     		if (page != null) {
     			addToMapIfNotNull(params, "page", page);
-    		}if (firstName != null) {
-                addToMapIfNotNull(params, "firstName", firstName);
-            }if (lastName != null) {
-                addToMapIfNotNull(params, "lastName", lastName);
+    		}
+    		
+    		if (firstName != null && lastName != null) {
+    			String filter = "firstName==" + firstName + ",lastName==" + lastName + "";
+                addToMapIfNotNull(params, "filter", filter);
+            } else if (firstName != null) {
+            	String filter = "firstName==" + firstName + "";
+                addToMapIfNotNull(params, "filter", filter);
+            } else if (lastName != null) {
+            	String filter = "lastName==" + lastName + "";
+                addToMapIfNotNull(params, "filter", filter);
             }
 
     		String response = this.DATA(url, strBody, params, "GET");
