@@ -541,14 +541,7 @@ public class PayrollApi {
 
     		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
     		
-    		PayTemplate pt = new PayTemplate();
-    		pt.setEmployeeID(pr.getEmployeeID());
-    		pt.setEarningTemplates(pr.getEarningTemplates());
-    		pt.setDeductionTemplates(pr.getDeductionTemplates());
-    		pt.setBenefitTemplates(pr.getBenefitTemplates());
-    		pt.setReimbursementTemplates(pr.getReimbursementTemplates());
-    		
-    		return pt;          
+    		return pr.getPayTemplate();          
 
     	} catch (IOException e) {
     		throw xeroExceptionHandler.handleBadRequest(e.getMessage());
