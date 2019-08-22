@@ -6,6 +6,8 @@ import java.util.UUID;
 import org.threeten.bp.LocalDateTime;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.JsonAdapter;
+import com.xero.api.CustomListObjectDeserialiser;
 import com.xero.model.Elements;
 
 /**
@@ -40,6 +42,7 @@ public class PayrollResponse {
  protected EmployeeTax employeeTax;
  @JsonProperty("OpeningBalances")
  protected OpeningBalances openingBalances;
+ @JsonAdapter(CustomListObjectDeserialiser.class)
  @JsonProperty("Leave")
  protected List<Leave> leave;
  @JsonProperty("LeaveBalance")
@@ -90,6 +93,7 @@ public class PayrollResponse {
  protected PayRunCalendar payRunCalendar;
  @JsonProperty("PayRunCalendars")
  protected List<PayRunCalendar> payRunCalendars;
+ @JsonAdapter(CustomListObjectDeserialiser.class)
  @JsonProperty("SalaryAndWages")
  protected List<SalaryAndWage> salaryAndWages;
  @JsonProperty("PayRun")

@@ -408,12 +408,8 @@ public class PayrollApi {
     		String url = uriBuilder.buildFromMap(uriVariables).toString();
 
     		String response = this.DATA(url, strBody, params, "GET");
-
-    		GsonBuilder gsonBuilder = new GsonBuilder();
-    		gsonBuilder.registerTypeAdapter(PayrollResponse.class, new CustomLeaveDeserialiser());
-    		Gson newgson = gsonBuilder.create();
     		
-    		PayrollResponse pr = newgson.fromJson(response, PayrollResponse.class);
+    		PayrollResponse pr = gson.fromJson(response, PayrollResponse.class);
     		
     		Leave lv = new Leave();
     		if(pr.getLeave() != null && pr.getLeave().size() > 0) {
