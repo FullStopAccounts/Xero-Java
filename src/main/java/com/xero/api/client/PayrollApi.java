@@ -451,7 +451,7 @@ public class PayrollApi {
     		uriVariables.put("EmployeeID", employeeID.toString());
     		
     		UriBuilder uriBuilder = UriBuilder.fromUri(apiClient.getBasePath() + correctPath);
-            String url = uriBuilder.build().toString();
+    		String url = uriBuilder.buildFromMap(uriVariables).toString();
             
             params = new HashMap<>();
             if (leaveType != null) {

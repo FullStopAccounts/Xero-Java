@@ -29,7 +29,7 @@ public class PayrollResponse {
  @JsonProperty("Pagination")
  protected Pagination pagination;
  @JsonProperty("Problem")
- protected String problem;
+ protected Problem problem;
  @JsonProperty("Benefit")
  protected Benefit benefit;
  @JsonProperty("Benefits")
@@ -162,10 +162,10 @@ public class PayrollResponse {
  }
 
  
- public String getProblem() {
+ public Problem getProblem() {
      return problem;
  }
- public void setProblem(String value) {
+ public void setProblem(Problem value) {
      this.problem = value;
  }
  
