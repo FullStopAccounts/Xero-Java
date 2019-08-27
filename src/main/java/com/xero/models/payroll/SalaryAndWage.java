@@ -22,8 +22,8 @@ import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 
 public class SalaryAndWage {
 	
-  @JsonProperty("salaryAndWagesID")
-  private UUID salaryAndWagesID;
+//  @JsonProperty("salaryAndWagesID")
+//  private UUID salaryAndWagesID;
   
   @JsonProperty("earningsRateID")
   private UUID earningsRateID;
@@ -57,21 +57,21 @@ public class SalaryAndWage {
   private List<ValidationError> validationErrors = null;
   
   
-  public SalaryAndWage salaryAndWagesID(UUID salaryAndWagesID) {
-	 this.salaryAndWagesID = salaryAndWagesID;
-	 return this;
-  }
-  /**
-	* Xero unique identifier for a salary and wages record
-	* @return salaryAndWagesID
-  **/
-  @ApiModelProperty(value = "Xero unique identifier for a salary and wages record")
-  public UUID getSalaryAndWagesID() {
-	 return salaryAndWagesID;
-  }
-  public void setSalaryAndWagesID(UUID salaryAndWagesID) {
-	 this.salaryAndWagesID = salaryAndWagesID;
-  }
+//  public SalaryAndWage salaryAndWagesID(UUID salaryAndWagesID) {
+//	 this.salaryAndWagesID = salaryAndWagesID;
+//	 return this;
+//  }
+//  /**
+//	* Xero unique identifier for a salary and wages record
+//	* @return salaryAndWagesID
+//  **/
+//  @ApiModelProperty(value = "Xero unique identifier for a salary and wages record")
+//  public UUID getSalaryAndWagesID() {
+//	 return salaryAndWagesID;
+//  }
+//  public void setSalaryAndWagesID(UUID salaryAndWagesID) {
+//	 this.salaryAndWagesID = salaryAndWagesID;
+//  }
   
   public SalaryAndWage earningsRateID(UUID earningsRateID) {
 	 this.earningsRateID = earningsRateID;
@@ -253,7 +253,8 @@ public class SalaryAndWage {
       return false;
     }
     SalaryAndWage salaryAndWage = (SalaryAndWage) o;
-    return Objects.equals(this.salaryAndWagesID, salaryAndWage.salaryAndWagesID) &&
+    return 
+    	//Objects.equals(this.salaryAndWagesID, salaryAndWage.salaryAndWagesID) &&
         Objects.equals(this.earningsRateID, salaryAndWage.earningsRateID) &&
         Objects.equals(this.numberOfUnitsPerWeek, salaryAndWage.numberOfUnitsPerWeek) &&
         Objects.equals(this.ratePerUnit, salaryAndWage.ratePerUnit) &&
@@ -268,7 +269,7 @@ public class SalaryAndWage {
 
   @Override
   public int hashCode() {
-    return Objects.hash(salaryAndWagesID, earningsRateID, numberOfUnitsPerWeek, ratePerUnit, numberOfUnitsPerDay, daysPerWeek, effectiveFrom, annualSalary, status, paymentType, validationErrors);
+    return Objects.hash(earningsRateID, numberOfUnitsPerWeek, ratePerUnit, numberOfUnitsPerDay, daysPerWeek, effectiveFrom, annualSalary, status, paymentType, validationErrors);
   }
 
 
@@ -277,7 +278,7 @@ public class SalaryAndWage {
     StringBuilder sb = new StringBuilder();
     sb.append("class SalaryAndWage {\n");
     
-    sb.append("    salaryAndWagesID: ").append(toIndentedString(salaryAndWagesID)).append("\n");
+    //sb.append("    salaryAndWagesID: ").append(toIndentedString(salaryAndWagesID)).append("\n");
     sb.append("    earningsRateID: ").append(toIndentedString(earningsRateID)).append("\n");
     sb.append("    numberOfUnitsPerWeek: ").append(toIndentedString(numberOfUnitsPerWeek)).append("\n");
     sb.append("    ratePerUnit: ").append(toIndentedString(ratePerUnit)).append("\n");

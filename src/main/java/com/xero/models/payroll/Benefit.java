@@ -44,6 +44,9 @@ public class Benefit {
   
   @JsonProperty("currentRecord")
   private Boolean currentRecord = null;
+
+  @JsonProperty("showBalanceToEmployee")
+  private Boolean showBalanceToEmployee = null;
   
   @JsonProperty("subjectToNIC")
   private Boolean subjectToNIC = null;
@@ -205,6 +208,20 @@ public class Benefit {
     this.currentRecord = currentRecord;
   }
   
+  public Benefit showBalanceToEmployee(Boolean showBalanceToEmployee) {
+    this.showBalanceToEmployee = showBalanceToEmployee;
+    return this;
+  }
+  /**
+   * @return showBalanceToEmployee
+  **/
+  public Boolean getShowBalanceToEmployee() {
+    return showBalanceToEmployee;
+  }
+  public void setShowBalanceToEmployee(Boolean showBalanceToEmployee) {
+    this.showBalanceToEmployee = showBalanceToEmployee;
+  }
+  
   public Benefit subjectToNIC(Boolean subjectToNIC) {
     this.subjectToNIC = subjectToNIC;
     return this;
@@ -314,6 +331,7 @@ public class Benefit {
         Objects.equals(this.percentage, benefit.percentage) &&
         Objects.equals(this.calculationType, benefit.calculationType) &&
         Objects.equals(this.currentRecord, benefit.currentRecord) &&
+        Objects.equals(this.showBalanceToEmployee, benefit.showBalanceToEmployee) &&
         Objects.equals(this.subjectToNIC, benefit.subjectToNIC) &&
         Objects.equals(this.subjectToPension, benefit.subjectToPension) &&
         Objects.equals(this.subjectToTax, benefit.subjectToTax) &&
@@ -323,7 +341,7 @@ public class Benefit {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, name, category, liabilityAccountId, expenseAccountId, standardAmount, percentage, calculationType, currentRecord, subjectToNIC, subjectToPension, subjectToTax, isCalculatingOnQualifyingEarnings, validationErrors);
+    return Objects.hash(id, name, category, liabilityAccountId, expenseAccountId, standardAmount, percentage, calculationType, currentRecord, showBalanceToEmployee, subjectToNIC, subjectToPension, subjectToTax, isCalculatingOnQualifyingEarnings, validationErrors);
   }
 
 
@@ -341,6 +359,7 @@ public class Benefit {
     sb.append("    percentage: ").append(toIndentedString(percentage)).append("\n");
     sb.append("    calculationType: ").append(toIndentedString(calculationType)).append("\n");
     sb.append("    currentRecord: ").append(toIndentedString(currentRecord)).append("\n");
+    sb.append("    showBalanceToEmployee: ").append(toIndentedString(showBalanceToEmployee)).append("\n");
     sb.append("    subjectToNIC: ").append(toIndentedString(subjectToNIC)).append("\n");
     sb.append("    subjectToPension: ").append(toIndentedString(subjectToPension)).append("\n");
     sb.append("    subjectToTax: ").append(toIndentedString(subjectToTax)).append("\n");
